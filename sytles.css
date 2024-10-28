@@ -12,3 +12,28 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+h2 {
+    text-align: center;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input, select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    background: #e7f3fe;
+    border: 1px solid #b3d4fc;
+}

@@ -1,3 +1,4 @@
+// script.js
 document.getElementById('registrationForm').addEventListener('submit', function (event) {
     const fullName = document.getElementById('fullName').value;
     const email = document.getElementById('email').value;
@@ -7,7 +8,9 @@ document.getElementById('registrationForm').addEventListener('submit', function 
     document.getElementById('nameError').innerText = '';
     document.getElementById('emailError').innerText = '';
     document.getElementById('phoneError').innerText = '';
-
+/*const errorMessages = document.querySelectorAll(".error-message");
+        errorMessages.forEach(message => message.textContent = "");
+    */
     let isValid = true;
     
     // Validation
@@ -31,4 +34,10 @@ document.getElementById('registrationForm').addEventListener('submit', function 
         event.preventDefault();
     }
 });
+
+
+
+
+
+
 

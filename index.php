@@ -1,61 +1,63 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Student Registration</title>
+    <title>Student Registration System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="container">
-    <h2>Student Registration Form</h2>
-    <form id="registrationForm" method="POST" action="">
-        <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" name="fullName" required>
-            <div class="error" id="nameError"></div>
+    <!-- Sign-up and Login Section -->
+    <div class="auth-container">
+        <!-- Sign-up Form -->
+        <div id="signUpForm">
+            <h2>Welcome to student registration system <br>Please Sign Up to continue!</h2>
+            <form id="signup" method="POST" action="register.php">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                    <div class="error" id="usernameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="error" id="passwordError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <div class="error" id="confirmPasswordError"></div>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
         </div>
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required>
-            <div class="error" id="emailError"></div>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" name="phone" required>
-            <div class="error" id="phoneError"></div>
-        </div>
-        <div class="form-group">
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender" required>
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="fieldOfStudy">Field of Study</label>
-            <select id="fieldOfStudy" name="fieldOfStudy" required>
-                <option value="">Select</option>
-                <option value="IT">IT</option>
-                <option value="CS">Computer Science</option>
-            </select>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
 
-    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-        <div class="result">
-            <h3>Submitted Information</h3>
-            <p><strong>Full Name:</strong> <?php echo htmlspecialchars($_POST['fullName']); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($_POST['email']); ?></p>
-            <p><strong>Phone Number:</strong> <?php echo htmlspecialchars($_POST['phone']); ?></p>
-            <p><strong>Gender:</strong> <?php echo htmlspecialchars($_POST['gender']); ?></p>
-            <p><strong>Field of Study:</strong> <?php echo htmlspecialchars($_POST['fieldOfStudy']); ?></p>
+        <!-- Login Form -->
+        <div id="loginForm" style="display:none;">
+            <h2>Login</h2>
+            <form id="login" method="POST" action="login.php">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" name="username" required>
+                    <div class="error" id="loginUsernameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <div class="error" id="loginPasswordError"></div>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign up here</a></p>
         </div>
-    <?php endif; ?>
-</div>
+    </div>
+
+    <!-- Registration Form (only accessible after login) -->
+    
 
 <script src="script.js"></script>
 

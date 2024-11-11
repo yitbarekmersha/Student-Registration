@@ -18,11 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstName = $_POST['first_name'];
     $lastName = $_POST['last_name'];
     $email = $_POST['email'];
-    $dob = $_POST['dob'];
+    
 
     // Prepare SQL query to insert student data
-    $stmt = $conn->prepare("INSERT INTO students (first_name, last_name, email, dob) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $firstName, $lastName, $email, $dob);
+    $stmt = $conn->prepare("INSERT INTO students (first_name, last_name, email) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $firstName, $lastName, $email);
 
     // Execute the query
     if ($stmt->execute()) {

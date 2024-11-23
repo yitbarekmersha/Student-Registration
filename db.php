@@ -3,7 +3,7 @@
 
 $servername = "localhost"; // your database host, typically localhost
 $username = "root";        // your database username
-$password = "password";            // your database password
+$password = "";            // your database password
 $dbname = "student_registration"; // name of your database
 
 // Create a connection to the MySQL database

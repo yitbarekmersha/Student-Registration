@@ -19,11 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lastName = $_POST['last_name'];
     $email = $_POST['email'];
     
-
-    // Prepare SQL query to insert student data
-    $stmt = $conn->prepare("INSERT INTO students (first_name, last_name, email) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $firstName, $lastName, $email);
-
     // Execute the query
     if ($stmt->execute()) {
         echo "Student registered successfully!";

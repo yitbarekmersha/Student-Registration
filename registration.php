@@ -197,3 +197,28 @@ echo "<p>Welcome back, " . $_COOKIE['userFullName'] . "!</p>";
 }
 }
 ?>
+<!-- Directory Management Forms -->
+<h3>PART 2 </br>Directory Management</h3>
+    <h4>create Directory<h4>
+    <!-- Create Directory -->
+    <form method="POST" action="">
+        <label for="newDirName">Directory Name</label>
+        <input type="text" id="newDirName" name="newDirName" required>
+        <button type="submit" name="createDirectory">Create Directory</button>
+    </form>
+    <h4>Rename Directory<h4>
+    <!-- Rename Directory -->
+    <form method="POST" action="">
+        <label for="oldDirName">Old Directory Name</label>
+        <input type="text" id="oldDirName" name="oldDirName" required>
+        <label for="newDirName">New Directory Name</label>
+        <input type="text" id="newDirName" name="newDirName" required>
+        <button type="submit" name="renameDirectory">Rename Directory</button>
+    </form>
+   <h4>Delete Directory<h4>
+    <!-- Delete Directory -->
+    <form method="POST" action="">
+        <label for="deleteDirName">Directory Name</label>
+        <input type="text" id="deleteDirName" name="deleteDirName" required>
+        <button type="submit" name="deleteDirectory">Delete Directory</button>
+    </form>

@@ -16,14 +16,14 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Student Registration</title>
+    <title>Online Student Registration and File/Directory Management</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="container">
-    <h2>Student Registration Form</h2>
-    <form id="registrationForm" method="POST" action="">
+    <h2>Student Registration Form </br> PART 1</h2>
+    <form id="registrationForm" method="POST" action="" enctype="multipart/form-data">
         <div class="form-group">
             <label for="fullName">Full Name</label>
             <input type="text" id="fullName" name="fullName" required>
@@ -55,22 +55,45 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                 <option value="CS">Computer Science</option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="profilePic">Profile Picture</label>
+            <input type="file" id="profilePic" name="profilePic" accept="image/*">
+            <div class="error" id="fileError"></div>
+        </div>
         <button type="submit">Submit</button>
     </form>
 
-    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-        <div class="result">
-            <h3>You have registered successfully!!!<br>Submitted Information</h3>
-            <p><strong>Full Name:</strong> <?php echo htmlspecialchars($_POST['fullName']); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($_POST['email']); ?></p>
-            <p><strong>Phone Number:</strong> <?php echo htmlspecialchars($_POST['phone']); ?></p>
-            <p><strong>Gender:</strong> <?php echo htmlspecialchars($_POST['gender']); ?></p>
-            <p><strong>Field of Study:</strong> <?php echo htmlspecialchars($_POST['fieldOfStudy']); ?></p>
-        </div>
-    <?php endif; ?>
-</div>
+    <?php
+    // Handle form submission for student registration
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Registration Form Processing
+        if (isset($_POST['fullName']) && isset($_POST['email'])) {
+            // Set a cookie for the user's full name
+            setcookie('userFullName', $_POST['fullName'], time() + (86400 * 30), "/"); // Expires in 30 days
+            echo "<div class='result'>
+                    <h3>You have registered successfully!!!<br>Submitted Information</h3>
+                    <p><strong>Full Name:</strong> " . htmlspecialchars($_POST['fullName']) . "</p>
+                    <p><strong>Email:</strong> " . htmlspecialchars($_POST['email']) . "</p>
+                    <p><strong>Phone Number:</strong> " . htmlspecialchars($_POST['phone']) . "</p>
+                    <p><strong>Gender:</strong> " . htmlspecialchars($_POST['gender']) . "</p>
+                    <p><strong>Field of Study:</strong> " . htmlspecialchars($_POST['fieldOfStudy']) . "</p>";
 
-<script src="script.js"></script>
+            // File upload handling for Profile Picture
+            if (isset($_FILES['profilePic']) && $_FILES['profilePic']['error'] == 0) {
+                $uploadDir = 'uploads/';
+                $uploadedFile = $uploadDir . basename($_FILES['profilePic']['name']);
 
-</body>
-</html>
+                // Check if the file is a valid image
+                if (getimagesize($_FILES['profilePic']['tmp_name'])) {
+                    // Move the uploaded file to the server
+                    if (move_uploaded_file($_FILES['profilePic']['tmp_name'], $uploadedFile)) {
+                        echo "<p><strong>Profile Picture:</strong> <img src='$uploadedFile' alt='Profile Picture' width='100'></p>";
+                    } else {
+                        echo "<p class='error'>Sorry, there was an error uploading your file.</p>";
+                    }
+                } else {
+                    echo "<p class='error'>Please upload a valid image file.</p>";
+                }
+            }
+            echo "</div>";
+        }

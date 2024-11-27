@@ -97,3 +97,36 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
             }
             echo "</div>";
         }
+// Directory Management: Create Directory
+if (isset($_POST['createDirectory'])) {
+    $dirName = $_POST['newDirName'];
+    if (!empty($dirName) && !is_dir($dirName)) {
+        mkdir($dirName, 0777);
+        echo "<p>Directory '$dirName' created successfully.</p>";
+    } else {
+        echo "<p>Directory creation failed. Please check the directory name.</p>";
+    }
+}
+
+// Directory Management: Rename Directory
+if (isset($_POST['renameDirectory'])) {
+    $oldDirName = $_POST['oldDirName'];
+    $newDirName = $_POST['newDirName'];
+    if (is_dir($oldDirName) && !is_dir($newDirName)) {
+        rename($oldDirName, $newDirName);
+        echo "<p>Directory '$oldDirName' renamed to '$newDirName' successfully.</p>";
+    } else {
+        echo "<p>Renaming failed. Please check the directory names.</p>";
+    }
+}
+
+// Directory Management: Delete Directory
+if (isset($_POST['deleteDirectory'])) {
+    $dirToDelete = $_POST['deleteDirName'];
+    if (is_dir($dirToDelete)) {
+        rmdir($dirToDelete);
+        echo "<p>Directory '$dirToDelete' deleted successfully.</p>";
+    } else {
+        echo "<p>Directory deletion failed. The directory may not exist.</p>";
+    }
+}

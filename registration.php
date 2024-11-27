@@ -222,3 +222,54 @@ echo "<p>Welcome back, " . $_COOKIE['userFullName'] . "!</p>";
         <input type="text" id="deleteDirName" name="deleteDirName" required>
         <button type="submit" name="deleteDirectory">Delete Directory</button>
     </form>
+    <!-- File Management Forms -->
+    <h3> PART 3</br>File Management</h3>
+
+    <!-- File Upload -->
+    <form method="POST" enctype="multipart/form-data">
+        <label for="fileToUpload">Choose a file to upload</label>
+        <input type="file" id="fileToUpload" name="fileToUpload" required>
+        <button type="submit">Upload File</button>
+    </form>
+    <h4>write to file<h4>
+    <!-- Write to File -->
+    <form method="POST" action="">
+        <label for="fileName">File Name</label>
+        <input type="text" id="fileName" name="fileName" required>
+        <label for="fileContent">Content</label>
+        <textarea id="fileContent" name="fileContent" rows="5" required></textarea>
+        <button type="submit" name="writeToFile">Write Content to File</button>
+    </form>
+    <h4>Read from file<h4>
+    <!-- Read from File -->
+    <form method="POST" action="">
+        <label for="fileName">File Name</label>
+        <input type="text" id="fileName" name="fileName" required>
+        <button type="submit" name="readFile">Read File</button>
+    </form>
+    <h4>Rename file<h4>
+    <!-- Rename File -->
+    <form method="POST" action="">
+        <label for="oldFileName">Old File Name</label>
+        <input type="text" id="oldFileName" name="oldFileName" required>
+        <label for="newFileName">New File Name</label>
+        <input type="text" id="newFileName" name="newFileName" required>
+        <button type="submit" name="renameFile">Rename File</button>
+    </form>
+    <h4>Delete file<h4>
+    <!-- Delete File -->
+    <form method="POST" action="">
+        <label for="deleteFileName">File Name</label>
+        <input type="text" id="deleteFileName" name="deleteFileName" required>
+        <button type="submit" name="deleteFile">Delete File</button>
+    </form>
+    <h4> Logout<h4>
+    <form action="logout.php" methode="post">
+    <button type="submit">logout</button>
+</form>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

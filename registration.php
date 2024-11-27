@@ -130,3 +130,70 @@ if (isset($_POST['deleteDirectory'])) {
         echo "<p>Directory deletion failed. The directory may not exist.</p>";
     }
 }
+// File Management: Upload File
+if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] == 0) {
+    $uploadDir = 'files/';
+    $uploadedFile = $uploadDir . basename($_FILES['fileToUpload']['name']);
+    if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadedFile)) {
+        echo "<p>File uploaded successfully: $uploadedFile</p>";
+    } else {
+        echo "<p>Error uploading file.</p>";
+    }
+}
+
+// File Management: Write to File
+if (isset($_POST['writeToFile'])) {
+    $fileName = $_POST['fileName'];
+    $content = $_POST['fileContent'];
+    if (file_put_contents($fileName, $content) !== false) {
+        echo "<p>Content written to file '$fileName'.</p>";
+    } else {
+        echo "<p>Failed to write to file '$fileName'.</p>";
+    }
+}
+
+// File Management: Read from File
+if (isset($_POST['readFile'])) {
+    $fileName = $_POST['fileName'];
+    if (file_exists($fileName)) {
+        $content = file_get_contents($fileName);
+        echo "<p>Content of '$fileName':<br><pre>$content</pre></p>";
+    } else {
+        echo "<p>File '$fileName' not found.</p>";
+    }
+}
+
+// File Management: Rename File
+if (isset($_POST['renameFile'])) {
+    $oldName = $_POST['oldFileName'];
+    $newName = $_POST['newFileName'];
+    if (file_exists($oldName)) {
+        if (rename($oldName, $newName)) {
+            echo "<p>File renamed from '$oldName' to '$newName'.</p>";
+        } else {
+            echo "<p>Failed to rename file.</p>";
+        }
+    } else {
+        echo "<p>File '$oldName' does not exist.</p>";
+    }
+}
+
+// File Management: Delete File
+if (isset($_POST['deleteFile'])) {
+    $fileName = $_POST['deleteFileName'];
+    if (file_exists($fileName)) {
+        if (unlink($fileName)) {
+            echo "<p>File '$fileName' deleted successfully.</p>";
+        } else {
+            echo "<p>Failed to delete file '$fileName'.</p>";
+        }
+    } else {
+        echo "<p>File '$fileName' not found.</p>";
+    }
+}
+// Display the user's full name from the cookie if available
+if (isset($_COOKIE['userFullName'])) {
+echo "<p>Welcome back, " . $_COOKIE['userFullName'] . "!</p>";
+}
+}
+?>

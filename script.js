@@ -15,7 +15,7 @@ document.getElementById('registrationForm').addEventListener('submit', function 
     
     // Validation
     if (!/^[A-Za-z\s]+$/.test(fullName)) {
-        document.getElementById('nameError').innerText = 'Please enter a valid full name.';
+        document.getElementById('nameError').innerText = 'name cannot contain a number.';
         isValid = false;
     }
 
@@ -25,7 +25,7 @@ document.getElementById('registrationForm').addEventListener('submit', function 
     }
 
     if (!/^\d+$/.test(phone)) {
-        document.getElementById('phoneError').innerText = 'Please enter a valid phone number.';
+        document.getElementById('phoneError').innerText = 'Phone number cannot contain a letter.';
         isValid = false;
     }
 
